@@ -1,0 +1,456 @@
+<div class="project" ng-controller="WorksCtrl">
+    <div class="page-container horizontal-menu">
+        <header class="navbar navbar-fixed-top">
+            <ul class="navbar-brand project-menu">
+                <li class="project-back"><a ng-click="confirmBackAction()" href="javascript:void(0)" class="tooltip-secondary" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="返回"><i class="entypo-left-open-big"></i></a></li>
+                <li class="project-setting"><img ng-src="{{baseUrl+pageWorks.thumb+randNumber}}" width="30px"/> <span>{{pageWorks.name}}</span>
+                </li>
+                <li ng-click="openWorksInfo()"><a href="javascript:void(0)" role="button" data-toggle="modal" class="pull-right"><i class="entypo-cog"></i> 作品设置</a></li>
+            </ul>
+            <ul class="project-menu navbar-right pull-right">
+                <li class="dropdown col-sm-5" ng-mousemove="toggleArea(true)" ng-mouseleave="toggleArea(false)"><a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"><i class="glyphicon glyphicon-qrcode"></i> 扫一扫预览</a>
+                    <div class="dropdown-menu dropdown-menu-rcode">
+                        <!--<img src="../images/rcode.jpg" width="146px"/>-->
+                        <qr size="146" text="visitUrl" image="false"></qr>
+                        请使用微信二维码扫描预览</div>
+                </li>
+                <li class="col-sm-5"><a href="javascript:void(0)" class="btn-orange" ng-click="saveWorks()">保 存</a></li>
+                <li class="col-sm-2"><a href="#/users/{{userId}}/works"><i class="entypo-menu"></i></a></li>
+            </ul>
+        </header>
+        <div class="main-project">
+            <!--左边菜单开始-->
+            <div class="sidebar-menu">
+                <header>目 录</header>
+                <div class="content-list">
+                    <ul dnd-list="pageWorks.pages">
+                        <li ng-repeat="item in pageWorks.pages" ng-click="selectPage($index)" ng-class="{'content-list-active':$index==selectedPageIndex}">
+                            <a href="javascript:void(0)">
+                                <i ng-class="{'entypo-book':$index==0,'entypo-doc':$index>0}" ></i> {{item.name}}
+                                <div class="list-action" ng-if="$index>0" style="top: -8px;">
+                                    <a href="javascript:void(0)" ng-click="changePageName($event, $index)" class="tooltip-secondary" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="编辑标题"><i class="glyphicon glyphicon-pencil"></i></a>
+                                    <a href="javascript:void(0)" ng-click="deletePage(item, $index)" class="tooltip-secondary" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="删除该页"><i class="glyphicon glyphicon-trash"></i></a>
+                                    <a href="javascript:void(0)" ng-click="dragPage($index)" class="tooltip-secondary cursor-move" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="上下拖动"><i class="fa fa-arrows"></i></a>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                    <div id="editPageName" style="position: absolute;width: 100%;" ng-show="isShowEditPageName">
+                        <input style="height: 35px;width: 85%;display: inline-block;margin-left: 10px;" type="text" class="form-control ng-pristine ng-valid" value="{{tmpPage.name}}" ng-model="tmpPage.name">
+                        <a href="javascript:void(0)" ng-click="confirmPageName()" class="tooltip-secondary" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="编辑标题"><i class="glyphicon glyphicon-ok"></i></a>
+                    </div>
+                </div>
+            </div>
+            <!--左边菜单结束-->
+            <div class="mainstage">
+                <div class="imgbox" ng-switch on="selectedPage.type">
+                    <div class="imgwrap">
+                        <button type="button" class="btn btn-green btn-xs" ng-click="changeTplStyle()">更换样式</button>
+                        <div ng-switch-when="common">
+                            <img ng-src="{{baseUrl+selectedPage.background+randNumber}}" width="320px"/>
+                            <img ng-repeat="item in selectedPage.animateImgs" ng-src="{{baseUrl+item.src+randNumber}}" err-src="images/err-default.png" width="320px"/>
+                        </div>
+                        <div ng-switch-when="gallery">
+                            <img ng-src="{{baseUrl+imgPath+selectedPage.background+randNumber}}" width="320px"/>
+                            <img ng-repeat="item in selectedPage.animateImgs" ng-src="{{baseUrl+item.src+randNumber}}" err-src="images/err-default.png" width="320px"/>
+                        </div>
+                        <div ng-switch-when="clickOpenUpdown">
+                            <img ng-src="{{baseUrl+selectedPage.imgSrc+randNumber}}" width="320px"/>
+                        </div>
+                        <div ng-switch-when="clickOpenLeftRight">
+                            <img ng-src="{{baseUrl+selectedPage.imgSrc+randNumber}}" width="320px"/>
+                        </div>
+                        <div ng-switch-when="wipeScreen">
+                            <img ng-src="{{baseUrl+selectedPage.imgSrc+randNumber}}" width="320px"/>
+                        </div>
+                        <div ng-switch-when="slide">
+                            <img ng-repeat="item in selectedPage.animateImgs" ng-src="{{baseUrl+item.src+randNumber}}" err-src="images/err-default.png" width="320px"/>
+                        </div>
+                        <div ng-switch-when="360">
+                            <img ng-repeat="item in selectedPage.animateImgs" ng-src="{{baseUrl+item.src+randNumber}}" err-src="images/err-default.png" width="320px"/>
+                        </div>
+                        <div ng-switch-when="album">
+                            <img ng-src="{{baseUrl+selectedPage.animateImgs[0].src+randNumber}}" err-src="images/err-default.png" width="320px"/>
+                            <div class="gallery-img gallery-img{{$index}}" ng-repeat="item in selectedPage.animateImgs">
+                                <img ng-src="{{baseUrl+item.src+randNumber}}" width="320px"/>
+                            </div>
+                        </div>
+                        <div ng-switch-when="map">
+                            <img ng-src="{{baseUrl+selectedPage.background+randNumber}}" width="320px"/>
+                            <img ng-src="{{baseUrl+selectedPage.button+randNumber}}" style="left:{{selectedPage.buttonX/2+'px'}};top:{{selectedPage.buttonY/2+'px'}};" width="40px"/>
+                        </div>
+                        <div ng-switch-when="video">
+                            <img ng-src="{{baseUrl+selectedPage.background+randNumber}}" width="320px"/>
+                            <img ng-src="{{baseUrl+selectedPage.videoScreenshot+randNumber}}" width="320px"/>
+                            <img ng-src="{{baseUrl+selectedPage.videoButton+randNumber}}" style="left: 140px; top:{{selectedPage.verticalPosition/2+'px'}}" width="40px"/>
+                        </div>
+                        <div ng-switch-default="other">
+                            this is default!
+                        </div>
+                    </div>
+                    <a ng-show="selectedPageIndex>0" class="add-new next-page" href="javascript:void(0)" ng-click="copyCurrentPage()"><i class="entypo-plus-circled"></i>复制该内页</a>
+                </div>
+            </div>
+            <!--右边菜单开始-->
+            <div class="sidebar-menu sidebar-menu-right">
+                <header>属性面板</header>
+                <p><b>创作说明：</b>XXXXXXXXX</p>
+                <ul>
+                    <!-- start clickOpen-->
+                    <li class="clearfix" ng-if="selectedPage.type=='clickOpenUpdown' || selectedPage.type=='clickOpenLeftRight' ||selectedPage.type=='wipeScreen'">
+                        <div class="pull-left thumb-box"><img ng-src="{{baseUrl+selectedPage.imgSrc}}" width="80px"/>
+                            <!--<a href="#"><i class="fa fa-search-plus"></i></a>-->
+                        </div>
+                        <div class="pull-right thumb-info">
+                    <span>开 篇.jpg
+                        <a ng-if="selectedPage.imgSrc.indexOf('png')>0" data-toggle="tooltip" data-placement="left" title="PNG图片背景是需要透明处理的" data-original-title="PNG图片背景是需要透明处理的">
+                            <i class="entypo-info-circled"></i></a>
+                    </span>
+                            <span>图片尺寸：{{selectedPage.size}}px</span>
+                            <span>
+                                <a type="button" href="javascript:void(0)" class="btn btn-success">更新图片
+                                    <input type="file" accept="image/gif, image/jpeg, image/x-png" nv-file-select="" uploader="uploaderStart" />
+                                </a>
+                            </span>
+                        </div>
+                    </li>
+                    <!-- start common,gallery background-->
+                    <li class="clearfix" ng-if="selectedPage.background">
+                        <div class="pull-left thumb-box"><img ng-src="{{baseUrl+selectedPage.background+randNumber}}" width="80px"/>
+                            <!--<a href="#"><i class="fa fa-search-plus"></i></a>-->
+                        </div>
+                        <div class="pull-right thumb-info">
+                    <span>背景.jpg
+                        <a ng-if="selectedPage.background.indexOf('png')>0" data-toggle="tooltip" data-placement="left" title="PNG图片背景是需要透明处理的" data-original-title="PNG图片背景是需要透明处理的">
+                            <i class="entypo-info-circled"></i></a>
+                    </span>
+                            <span>图片尺寸：{{selectedPage.size}}px</span>
+                            <span>
+                                <a type="button" href="javascript:void(0)" class="btn btn-success">更新图片
+                                  <input type="file" accept="image/gif, image/jpeg, image/x-png" nv-file-select="" uploader="uploaderBg" />
+                                </a>
+                            </span>
+                            <span ng-if="selectedPage.type=='common'">运动方式：<select name="effect" ng-model="selectedPage.effect" class="selectboxit visible" data-native="true" data-text="默认">
+                                    <option value="fade">默认</option>
+                                    <option value="120%">缩放</option>
+
+                                </select>
+				            </span>
+                        </div>
+                    </li>
+                    <!-- start gallery tipImage-->
+                    <li class="clearfix" ng-if="selectedPage.tipImg">
+                        <div class="pull-left thumb-box"><img ng-src="{{baseUrl+selectedPage.tipImg+randNumber}}" width="80px"/>
+                            <!--<a href="#"><i class="fa fa-search-plus"></i></a>-->
+                        </div>
+                        <div class="pull-right thumb-info">
+                    <span>Side.jpg
+                        <a ng-if="selectedPage.tipImg.indexOf('png')>0" data-toggle="tooltip" data-placement="left" title="PNG图片背景是需要透明处理的" data-original-title="PNG图片背景是需要透明处理的">
+                            <i class="entypo-info-circled"></i></a>
+                    </span>
+                            <span>图片尺寸：{{selectedPage.size}}px</span>
+                            <span>
+                                <a type="button" href="javascript:void(0)" class="btn btn-success">更新图片
+                                    <input type="file" accept="image/gif, image/jpeg, image/x-png" nv-file-select="" uploader="uploaderTipImg" />
+                                </a>
+                            </span>
+                        </div>
+                    </li>
+                    <!--content common, gallery-->
+                    <li class="clearfix repeat-animation" ng-repeat="item in selectedPage.animateImgs">
+                        <div class="pull-left thumb-box"><img ng-src="{{baseUrl+item.src+randNumber}}" err-src="images/err-default.png" width="80px"/>
+                            <!--<a href="#"><i class="fa fa-search-plus"></i></a>-->
+                        </div>
+                        <div class="pull-right thumb-info">
+                    <span>图层 {{$index+1}}.{{item.src.indexOf('png')>0?'png':'jpg'}}
+                        <a ng-if="item.src.indexOf('png')>0" data-toggle="tooltip" data-placement="left" title="PNG图片背景是需要透明处理的" data-original-title="PNG图片背景是需要透明处理的">
+                            <i class="entypo-info-circled"></i></a>
+                    </span>
+                            <span>图片尺寸：{{selectedPage.size}}px</span>
+                            <span>
+                                <a type="button" href="javascript:void(0)" class="btn btn-success">更新图片
+                                  <input type="file" accept="image/gif, image/jpeg, image/x-png" nv-file-select="" uploader="uploader" ng-click="changeUploaderIndex($index, item.src)"/>
+                                </a>
+                            </span>
+                    <span ng-if="selectedPage.type=='common'||selectedPage.type=='gallery'">运动方式：<select name="motion" ng-change="changeMultiParams($index, item.motion, 'motion')" ng-model="item.motion" class="selectboxit visible" data-native="true" data-text="默认">
+                        <option value="move-left-60%">默认</option>
+                        <option value="fadeIn">淡入</option>
+                        <option value="move-left-100%">从左到右(100%)</option>
+                        <option value="move-left-50%">从左到右(50%)</option>
+                        <option value="move-right-100%">从右到左(100%)</option>
+                        <option value="move-right-50%">从右到左(50%)</option>
+                        <option value="move-top-100%">从上到下(100%)</option>
+                        <option value="move-top-50%">从上到下(50%)</option>
+                        <option value="move-bottom-100%">从下到上(100%)</option>
+                        <option value="move-bottom-50%">从下到上(50%)</option>
+                    </select>
+				    </span>
+                    <span ng-if="selectedPage.type=='common'||selectedPage.type=='gallery'">运动延时：
+                      <select name="delayTime" ng-change="changeParams($index, item.delayTime, 'delayTime')" ng-model="item.delayTime" class="selectboxit visible" data-native="true" data-text="默认">
+                          <option value="1000">1000毫秒</option>
+                          <option value="2000">2000毫秒</option>
+                          <option value="3000">3000毫秒</option>
+                          <option value="4000">4000毫秒</option>
+                          <option value="5000">5000毫秒</option>
+                          <option value="6000">6000毫秒</option>
+                      </select>
+                    </span>
+                        </div>
+                        <a href="javascript:void(0)" class="pageli-action" ng-click="deletePageLayer($index, $event)"><i ng-click="deletePageLayer($index, $event)" class="glyphicon glyphicon-trash"></i></a>
+                    </li>
+                    <li class="clearfix" ng-if="selectedPage.type=='map'">
+                        <div class="pull-left thumb-box"><img ng-src="{{baseUrl+selectedPage.button+randNumber}}"/>
+                            <!--<a href="#"><i class="fa fa-search-plus"></i></a>-->
+                        </div>
+                        <div class="pull-right thumb-info">
+                            <span>位置标记.png
+                                <a data-toggle="tooltip" data-placement="left" title="" data-original-title="PNG图片背景是需要透明处理的">
+                                <i class="entypo-info-circled"></i></a>
+                            </span>
+                            <span>图片尺寸：80*80px</span>
+                            <span>
+                                <a type="button" href="javascript:void(0)" class="btn btn-success">更新图片
+                                    <input type="file" accept="image/gif, image/jpeg, image/x-png" nv-file-select="" uploader="uploaderMapBtn" />
+                                </a>
+                            </span>
+                            <span>垂直位置设定：
+                                <input type="text" class="form-control input-sm" style="width:60px;display:inline-block"
+                                                placeholder="720" value="{{selectedPage.buttonY}}" ng-model="selectedPage.buttonY"> px
+                            </span>
+                            <span>水平位置设定：
+                                <input type="text" class="form-control input-sm" style="width:60px;display:inline-block"
+                                                placeholder="320" value="{{selectedPage.buttonX}}" ng-model="selectedPage.buttonX"> px
+                            </span>
+                        </div>
+                    </li>
+                    <li class="clearfix" ng-if="selectedPage.type=='map'">
+                        <div class="map-info">
+                            <span>地图定位设置：</span>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="请输入“美罗城”、“虹桥路1号”等等"
+                                       value="{{selectedPage.address}}" ng-model="selectedPage.address">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-success" type="button" ng-click="searchNewPlace(selectedPage.address)">搜索!</button>
+                                </span>
+                            </div>
+                            <div id="allMap" class="map-preview">这里直接调用百度地图预览</div>
+                        </div>
+                    </li>
+                    <li class="clearfix" ng-if="selectedPage.type=='video'">
+                        <div class="pull-left thumb-box"><img ng-src="{{baseUrl+selectedPage.videoScreenshot+randNumber}}" width="80px"/>
+                            <!--<a href="#"><i class="fa fa-search-plus"></i></a>-->
+                        </div>
+                        <div class="pull-right thumb-info">
+                            <span>视频封面
+                                <a ng-if="selectedPage.videoScreenshot.indexOf('png')>0" data-toggle="tooltip" data-placement="left" title="PNG图片背景是需要透明处理的" data-original-title="PNG图片背景是需要透明处理的">
+                                    <i class="entypo-info-circled"></i></a>
+                            </span>
+                            <span>图片尺寸：{{selectedPage.size}}px</span>
+                            <span>
+                                <a type="button" href="javascript:void(0)" class="btn btn-success">更新图片
+                                  <input type="file" accept="image/gif, image/jpeg, image/x-png" nv-file-select="" uploader="uploaderVideoCover" />
+                                </a>
+                            </span>
+                        </div>
+                    </li>
+                    <li class="clearfix" ng-if="selectedPage.type=='video'">
+                        <div class="video-info">
+                            <span>视频链接
+                                <a data-toggle="tooltip" data-placement="left" title="" data-original-title="目前只支持优酷和土豆的视频地址">
+                                <i class="entypo-info-circled"></i></a>
+                            </span>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="视频的地址粘贴在这里" ng-model="orgUrl">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-success" type="button" ng-click="changeVideoUrl(orgUrl)">确定</button>
+                                </span>
+                            </div>
+                            <label class="control-label">请把视频的播放地址粘贴在这里，目前支持优酷和土豆视频</label>
+                            <span class="has-error" style="display:none">
+                                <input type="text" class="form-control" id="field-1" placeholder="视频的地址粘贴在这里">
+                                <label class="control-label">你输入的地址有误，无法找到视频，请重新输入</label>
+                            </span>
+                            <span class="has-success" style="display:none">
+                                <input type="text" class="form-control" id="field-2" placeholder="视频的地址粘贴在这里">
+                                <label class="control-label">已成功找到视频</label>
+                            </span>
+                        </div>
+                        <div class="video-preview">
+                            <iframe height="180" width="336" ng-src="{{secVideoUrl}}" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                    </li>
+                    <li class="clearfix" ng-if="selectedPage.type=='video'">
+                        <div class="pull-left thumb-box"><img ng-src="{{baseUrl+selectedPage.videoButton+randNumber}}" width="80px"/>
+                            <!--<a href="#"><i class="fa fa-search-plus"></i></a>-->
+                        </div>
+                        <div class="pull-right thumb-info">
+                            <span>播放按钮.png
+                                <a data-toggle="tooltip" data-placement="left" title="" data-original-title="PNG图片背景是需要透明处理的">
+                                <i class="entypo-info-circled"></i></a>
+                            </span>
+                            <span>图片尺寸：80*80px</span>
+                            <span>
+                                <a type="button" href="javascript:void(0)" class="btn btn-success">更新图片
+                                    <input type="file" accept="image/gif, image/jpeg, image/x-png" nv-file-select="" uploader="uploaderPlayBtn" />
+                                </a>
+                            </span>
+                            <span>垂直位置设定：
+                                <input type="text" class="form-control input-sm" style="width:60px;display:inline-block"
+                                                placeholder="720" value="{{selectedPage.verticalPosition}}" ng-model="selectedPage.verticalPosition"> px
+                            </span>
+                        </div>
+                    </li>
+                    <li class="clearfix" ng-hide="selectedPage.type=='map'||selectedPage.type=='video'||selectedPage.type=='clickOpenUpdown'||selectedPage.type=='clickOpenLeftRight'||selectedPage.type=='wipeScreen'"><div class="pull-left thumb-box add-new-thumb">
+                        <a href="javascript:void(0)" ng-click="addLayer()"><i class="entypo-plus-circled"></i>添加新图层</a>
+                    </div></li>
+                </ul>
+            </div>
+            <!--右边菜单结束-->
+        </div>
+    </div>
+    <!--作品设置浮动面板-->
+    <div class="modal fade custom-width in" id="mySetting" aria-hidden="false" style="display: none;">
+        <div class="modal-dialog" style="width: 60%;">
+            <div class="modal-content setting-work">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="closeWorkInfo()">×</button>
+                    <h3 class="modal-title">作品基本信息设置</h3>
+                </div>
+                <div class="modal-body row">
+                    <div class="col-sm-4 album-setting">
+                        <div class="fileinput fileinput-new" data-provides="fileinput"><input type="hidden" value="" name="...">
+                            <div class="fileinput-new thumbnail" style="width: 150px; height: 150px;" data-trigger="fileinput">
+                                <img ng-show="!worksInfo.thumb" src="http://placehold.it/150x150" alt="...">
+                                <img ng-show="worksInfo.thumb" ng-src="{{baseUrl+worksInfo.thumb+randNumber}}" alt="...">
+                            </div>
+                            <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 150px; max-height: 150px; line-height: 6px;"></div>
+                            <div>
+									<span class="btn btn-white btn-file">
+										<span class="fileinput-new">选择图片</span>
+										<span class="fileinput-exists">更改图片</span>
+										<input type="file" name="" accept="image/gif, image/jpeg, image/x-png" nv-file-select="" uploader="uploaderThumb">
+									</span>
+                                <!--<a href="#" class="btn btn-orange fileinput-exists" data-dismiss="fileinput">移除图片</a>-->
+                            </div>
+                        </div>
+                        <h6>作品封面（缩略图）</h6>
+                        <p>最大支持 1MB 的正方形图片( jpg / gif / png )</p>
+                    </div>
+                    <div class="col-sm-8">
+                        <form role="form" class="form-horizontal form-groups-bordered">
+                            <div class="form-group">
+                                <label for="field-1" class="col-sm-2 control-label">标题</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" maxlength="12" placeholder="请输入作品的标题" value="{{worksInfo.pageTitle}}" ng-model="worksInfo.pageTitle">
+                                    <span>输入不超过12个字符，作为微信分享的标题<a href="javascript:void(0)"> <i class="entypo-help-circled"></i></a></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">描述</label>
+                                <div class="col-sm-9">
+                                    <textarea class="form-control" placeholder="请描述一下您的作品" maxlength="150" ng-model="worksInfo.pageDescribe">{{worksInfo.pageDescribe}}</textarea>
+                                    <span>输入不超过150个字符，作为微信分享的描述<a href="javascript:void(0)"> <i class="entypo-help-circled"></i></a></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="field-1" class="col-sm-2 control-label">背景音乐 </label>
+                                <div class="col-sm-9">
+                                    <p>{{worksInfo.music.displayName}}.mp3</p>
+                                    <div ng-show="musicProgress>0" class="progress" style="width: 250px;display: inline-block;margin: 0;">
+                                        <div class="progress-bar" role="progressbar" ng-style="{ 'width': (musicProgress-10) + '%' }">
+                                        </div>
+                                    </div>
+                                    <div ng-show="musicProgress>10" style="display: inline-block;">{{(musicProgress-10) + '%'}}</div>
+                                    <div class="music-status" style="display: inline-block;">
+                                        <span ng-show="musicSuccess===true">文件上传成功！</span>
+                                        <span ng-show="musicSuccess===false">文件上传失败！</span>
+                                    </div>
+                                    <input type="file" accept="audio/x-mpeg" class="form-control" id="field-file" placeholder="Placeholder" nv-file-select="" uploader="uploaderMusic">
+                                    <div class="checkbox checkbox-replace color-green neon-cb-replacement checked">
+                                        <label class="cb-wrapper"><input type="checkbox" id="chk-1" ng-model="worksInfo.music.hasMusic"><div ng-class="{'checked': worksInfo.music.hasMusic}"></div></label>
+                                        <label>启用背景音乐</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">背景颜色</label>
+                                <div class="col-sm-4">
+                                    <div class="input-group">
+                                        <!--<input color-picker ng-model="worksInfo.backgroundColor">-->
+                                        <input type="text" colorpicker ng-model="worksInfo.backgroundColor">
+                                        <div class="input-group-addon">
+                                            <i class="color-preview" style="background-color: {{worksInfo.backgroundColor}};"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="closeWorkInfo()">取 消</button>
+                    <button type="button" class="btn btn-green" ng-click="confirmWorksInfo()">确认修改</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--样式选择浮动面板-->
+    <div class="modal fade custom-width in" id="tplStyle" aria-hidden="false" style="display: none;">
+        <div class="modal-dialog" style="width: 90%;">
+            <div class="modal-content setting-style">
+                <div class="modal-header clearfix">
+                    <h3 ng-show="styleList[0].category=='start'" class="modal-title col-sm-8">请选择开篇样式</h3>
+                    <h3 ng-show="styleList[0].category=='content'" class="modal-title col-sm-8">请选择内页样式</h3>
+                    <div class="col-sm-4 text-right">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="closeTplStylePage()">取 消</button>
+                        <button type="button" class="btn btn-green" ng-click="confirmStyle()">确认并启用</button>
+                    </div>
+                </div>
+
+                <div class="modal-body row">
+                    <ul class="clearfix">
+                        <li class="col-sm-2" ng-class="{'template-active':item.id==selectedStyle.id}" ng-repeat="item in styleList" ng-click="selectStyle(item)">
+                            <img ng-src="{{baseUrl+item.thumb}}" class="img-responsive"/>
+                            <h5>{{item.name}}</h5>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Save Info page -->
+    <div class="modal fade custom-width in" id="saveInfo" aria-hidden="false" style="display: none;padding-top: 220px">
+        <div class="modal-dialog" style="width: 20%;color: #996600;text-align: center;">
+            <div class="modal-content setting-style">
+                <div class="modal-header clearfix">
+                    <p style="font-size: 16px;">作品保存成功！</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="confirmDel" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="padding-top: 120px">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-body">确定要删除该内页</div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="deleteWorks">删 除</button>
+                    <button type="button" class="btn btn-primary" id="cancelWorks">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 返回 confirm-->
+    <div id="confirmBack" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="padding-top: 120px">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-body">是否保存该作品</div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="backAndSave">是</button>
+                    <button type="button" class="btn btn-primary" id="backAndCancel">否</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

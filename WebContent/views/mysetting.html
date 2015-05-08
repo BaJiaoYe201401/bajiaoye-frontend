@@ -1,0 +1,83 @@
+<div ng-controller="UserCtrl">
+    <div class="page-container horizontal-menu">
+        <div ng-include="'views/header.html'"></div>
+    <div class="container">
+    <div class="row mysetting">
+    <div class="sidebar-menu fixed">
+    <header>用户中心</header>
+    <ul id="main-menu">
+    <li class="mysettingmenu-active"><a href="#/users/{{userId}}/mysetting"><i class="entypo-cog"></i> 信息设置</a></li>
+    <li ><a href="#/users/{{userId}}/resetpassword"><i class="entypo-list"></i> 修改密码</a></li>
+    </ul>
+    </div>
+    <div class="mysetting-content">
+    <header>个人信息设置</header>
+      <div class="form-group clearfix">
+                            <label for="field-2" class="col-sm-3 control-label text-right">登陆邮箱</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="field-2" value="{{userInfo.email}}" placeholder="kreat@gmail.com" disabled="">
+                            </div>
+       </div>
+       <div class="form-group clearfix">
+                            <label for="field-1" class="col-sm-3 control-label text-right">姓 名</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="field-1" placeholder="请输入你的大名" value="{{userInfo.name}}" ng-model="userInfo.name">
+                            </div>
+        </div>
+        <div class="form-group clearfix">
+                            <label for="field-1" class="col-sm-3 control-label text-right">职 务</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="field-1" placeholder="请输入你的职务" value="{{userInfo.duty}}" ng-model="userInfo.duty">
+                            </div>
+        </div>
+        <div class="form-group clearfix">
+                            <label for="field-1" class="col-sm-3 control-label text-right">联系电话</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="number" data-validate="number" placeholder="请输入你的联系电话" value="{{userInfo.phone}}" ng-model="userInfo.phone">
+                            </div>
+        </div>
+        <div class="form-group clearfix">
+                            <label for="field-1" class="col-sm-3 control-label text-right">QQ号码</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="number" data-validate="number" placeholder="请输入你的QQ号码" value="{{userInfo.qq}}" ng-model="userInfo.qq">
+                            </div>
+        </div>
+    <header>企业信息设置</header>
+      <div class="form-group clearfix">
+                            <label for="field-2" class="col-sm-3 control-label text-right">企业名称</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="field-2" placeholder="请输入公司名称" value="{{userInfo.comName}}" ng-model="userInfo.comName">
+                            </div>
+       </div>
+        <div class="form-group clearfix">
+                            <label for="field-2" class="col-sm-3 control-label text-right">地区</label>
+                            <div class="col-sm-3">
+                                <select class="f-sel_W40 f-mar-r-10 required f-failInp" name="item[province]" id="province" placeholder="请选择公司所在省份"><option value="0">省份</option></select>
+
+                                <select class="f-sel_W40 f-mar-r-10 required f-failInp" name="item[province]" id="province" placeholder="请选择公司所在城市"><option value="0">城市</option></select>
+                            </div>
+       </div>
+         <div class="form-group clearfix">
+                            <label for="field-2" class="col-sm-3 control-label text-right">企业网站</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="field-2" placeholder="请输入公司网站" value="{{userInfo.comSite}}" ng-model="userInfo.comSite">
+                            </div>
+       </div>
+       <div class="form-group clearfix modal-footer text-center"><button type="button" class="btn btn-white btn-lg">取 消</button>
+    <button type="button" class="btn btn-success btn-lg" ng-click="updateUser()">确认修改</button></div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div ng-include="'views/footer.html'"></div>
+    <!-- Save Info page -->
+    <div class="modal fade custom-width in" id="saveInfo" aria-hidden="false" style="display: none;padding-top: 220px">
+        <div class="modal-dialog" style="width: 20%;color: #996600;text-align: center;">
+            <div class="modal-content setting-style">
+                <div class="modal-header clearfix">
+                    <p style="font-size: 16px;">信息保存成功！</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

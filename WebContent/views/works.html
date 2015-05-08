@@ -1,0 +1,66 @@
+<div ng-controller="WorksCtrl">
+    <div class="page-container horizontal-menu">
+        <div ng-include="'views/header.html'"></div>
+        <div class="container">
+            <div class="page-header clearfix"><h1>我的作品</h1></div>
+            <div class="row gallery-env">
+                <div class="col-sm-3">
+                    <article class="album"><a type="button" class="btn btn-create"
+                                              href="#/users/{{userId}}/works-start"><i
+                            class="entypo-plus-circled"></i>
+
+                        <h2>创建新作品</h2></a></article>
+                </div>
+                <div class="col-sm-3" ng-repeat="item in allWorks">
+                    <article class="album">
+                        <header>
+                            <a href="#/users/{{userId}}/works-edit/{{item.id}}">
+                                <img ng-show="!(isShowQrCodeIndex==$index&&isShowQrCode)" ng-src="{{baseUrl+item.thumb+randNumber}}" style="width: 263px; height: 263px;" class="img-responsive"/>
+                                <qr ng-show="isShowQrCodeIndex==$index&&isShowQrCode" size="258" text="item.visitUrl" image="false"></qr>
+                            </a>
+
+                            <div class="album-options">
+                                <a href="#/users/{{userId}}/works-edit/{{item.id}}" class="col-sm-4"><i
+                                        class="fa fa-edit"></i> 编 辑</a>
+                                <a href="javascript:void(0)" ng-click="confirmWorksAction(item.id, item.name, 'copy', $event)" class="col-sm-4"><i
+                                        class="fa fa-copy"></i> 复 制</a>
+                                <a href="javascript:void(0)" ng-click="confirmWorksAction(item.id, item.name, 'delete', $event)" class="col-sm-4"><i
+                                        class="fa fa-trash-o"></i> 删 除</a>
+                            </div>
+                        </header>
+                        <section class="album-info clearfix">
+                            <div class="album-info-left">
+                                <h5><a href="#/users/{{userId}}/works-edit/{{item.id}}">{{item.name}}</a></h5>
+
+                                <p>最后修改:{{item.lastModify}}</p></div>
+                            <a href="javascript:void(0)" class="album-qrcode" ng-mousemove="toggleQrCode($index, true)" ng-mouseleave="toggleQrCode($index, false)">
+                                <i class="glyphicon glyphicon-qrcode"></i>
+                                <!--<qr size="24" text="item.url" image="false"></qr>-->
+                            </a>
+                        </section>
+                        <footer>
+                            <div class="col-sm-4"><h6><a href="javascript:void(0)">46050</a></h6>最近30天</div>
+                            <div class="col-sm-4"><h6><a href="javascript:void(0)">12050</a></h6>最近7天</div>
+                            <div class="col-sm-4"><h6><a href="javascript:void(0)">4600</a></h6>本日</div>
+                        </footer>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-include="'views/footer.html'"></div>
+    <div id="code"></div>
+    <div id="confirmInfo" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="padding-top: 120px">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div ng-show="isShowConfirmAction=='copy'" class="modal-body">确定要复制作品：{{confirmName}}</div>
+                <div ng-show="isShowConfirmAction=='delete'" class="modal-body">确定要删除作品：{{confirmName}}</div>
+                <div class="modal-footer">
+                    <button ng-show="isShowConfirmAction=='copy'" type="button" class="btn btn-primary" id="copyWorks">复 制</button>
+                    <button ng-show="isShowConfirmAction=='delete'" type="button" class="btn btn-primary" id="deleteWorks">删 除</button>
+                    <button type="button" class="btn btn-primary" id="cancelWorks">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

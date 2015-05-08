@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description" content="芭蕉叶-微创意服务平台" />
+	<meta name="author" content="" />	
+	<title>芭蕉叶-微创意服务平台</title>
+	<link rel="stylesheet" href="assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css">
+	 <link rel="stylesheet" href="assets/css/font-icons/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="assets/css/font-icons/entypo/css/entypo.css">
+	<link rel="stylesheet" href="assets/css/bootstrap.css">
+	<link rel="stylesheet" href="assets/css/bajiaoye-theme.css">
+	<link rel="stylesheet" href="assets/css/bajiaoye-form.css">
+     <!--[if lt IE 9]><script src="assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+	<![endif]-->
+		
+</head>
+<body class="page-body">
+<div class="page-container horizontal-menu">
+<header class="navbar navbar-fixed-top">
+<div class="navbar-inner container">
+		<div class="navbar-brand">
+				<a href="index.html">
+					<img src="assets/images/logo@2x.png" width="88" alt="" />
+				</a>
+		</div>
+					<ul class="navbar-nav pull-right">
+				<li>
+					<a href="dashboard.html">
+						<i class="entypo-layout"></i>
+						<span>我的作品</span>
+					</a>
+				</li>
+				<li>
+					<a href="index.html">
+						<i class="entypo-help"></i>
+						<span>帮助中心</span>
+					</a>
+				</li>
+				<li class="myactive">
+					<a href="#">
+						<i class="entypo-user"></i>
+						<span>用户中心</span>
+					</a>
+					<ul class="dropdown-menu">
+						<li>
+							<a href="mysetting.html">
+							<i class="entypo-cog"></i>
+								<span>个人设置</span>
+							</a>
+						</li>
+						<li>
+							<a href="myorder.html">
+							<i class="entypo-list"></i>
+								<span>我的订单</span>
+							</a>
+						</li>
+						<li>
+							<a href="mybill.html">
+							<i class="entypo-docs"></i>
+								<span>发票管理</span>
+							</a>
+						</li>
+						<li>
+							<a href="loginout.html">
+							<i class="entypo-logout"></i>
+								<span>登 出</span>
+							</a>
+						</li>
+					</ul>
+				</li>
+				</ul>
+</div>
+</header>
+<div class="container">
+<div class="row mysetting">
+<div class="sidebar-menu fixed">
+<header>用户中心</header>
+<ul id="main-menu">
+<li><a href="mysetting.html"><i class="entypo-cog"></i> 信息设置</a></li>
+<li><a href="myorder.html"><i class="entypo-list"></i> 订单管理</a></li>
+<li class="mysettingmenu-active"><a href="mybill.html"><i class="entypo-docs"></i> 发票管理</a></li>
+</ul>
+</div>
+<div class="mysetting-content">
+<header>索要发票<button type="button" class="btn btn-default pull-right">查看所有发票</button></header>
+<div class="alert alert-warning col-md-12">可开具发票金额为您在芭蕉叶系统的账单总额，您可按不大于可索取发票总额的任意金额申请发票，我们会在您申请发票后的第三个工作日为您开出并邮寄。</div>
+   <div class="form-group clearfix">
+						<label for="field-2" class="col-sm-12 control-label">可索取发票总额：<b class="text-success">3600</b> 元</label>
+   </div>
+<div class="col-sm-12 clearfix">
+<h6>请选择发票信息<a href="javascript:;" onclick="jQuery('#modal-2').modal('show');" class="pull-right"><i class="entypo-plus"></i>添加新发票信息</a></h6>
+<table class="table responsive">
+			<thead>
+				<tr>
+					<th>请选择</th>
+					<th>发票抬头</th>
+					<th>开具类型</th>
+				</tr>
+			</thead>			
+			<tbody>
+				<tr>
+					<td><input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked=""></td>
+					<td>杭州芭蕉叶网络科技有限公司</td>
+					<td>企业</td>
+				</tr>
+				
+				<tr>
+					<td><input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked=""></td>
+					<td>杭州芭蕉叶网络科技有限公司</td>
+					<td>企业</td>
+				</tr>
+				
+				<tr>
+					<td><input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked=""></td>
+					<td>杭州芭蕉叶网络科技有限公司</td>
+					<td>企业</td>
+				</tr>
+			</tbody>
+</table>  
+   <div class="form-group clearfix">
+						<label for="field-2" class="col-sm-3 control-label text-right">开具类型:</label>
+						<div class="col-sm-6">企业</div>
+   </div>
+   <div class="form-group clearfix">
+						<label for="field-2" class="col-sm-3 control-label text-right">发票抬头:</label>
+						<div class="col-sm-6">杭州芭蕉叶网络科技有限公司</div>
+   </div> 
+   <div class="form-group clearfix">
+						<label for="field-2" class="col-sm-3 control-label text-right">邮寄地址:</label>
+						<div class="col-sm-6">上海市嘉定区嘉行公路851号</div>
+   </div> 
+   <div class="form-group clearfix">
+						<label for="field-2" class="col-sm-3 control-label text-right">收件人:</label>
+						<div class="col-sm-6">潘尚仕</div>
+   </div>
+   <div class="form-group clearfix">
+						<label for="field-2" class="col-sm-3 control-label text-right">联系电话:</label>
+						<div class="col-sm-6">15908888888</div>
+   </div> 
+      <div class="form-group clearfix">
+						<label for="field-1" class="col-sm-3 control-label text-right">发票金额:</label>
+						<div class="col-sm-4">
+							<input type="text" class="form-control" id="field-1" placeholder="">
+						</div>
+	</div>
+</div>
+<div class="form-group clearfix modal-footer text-center"><button type="button" class="btn btn-white btn-lg">取 消</button>
+<button type="button" class="btn btn-success btn-lg">确认提交</button></div>
+</div>
+</div>
+</div>
+</div>
+<footer class="main"><div class="container text-right">© 2014  芭蕉叶网络科技有限公司   版权所有</div></footer>
+<!--添加发票信息浮动面板-->
+<div class="modal fade custom-width in" id="modal-2" aria-hidden="false" style="display: none;">
+	<div class="modal-dialog" style="width: 50%;">
+		<div class="modal-content setting-work">
+			
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h3 class="modal-title">添加新发票信息</h3>
+			</div>
+			
+			<div class="modal-body row">
+			<div class="col-sm-12">
+			<form role="form" class="form-horizontal form-groups-bordered">
+					<div class="form-group">
+						<label for="field-1" class="col-sm-2 control-label">发票类型:</label>
+						<div class="col-sm-9">
+	                       <select class="form-control">
+								<option>企业</option>
+								<option>个人</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="field-ta" class="col-sm-2 control-label">企业名称:</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" id="field-1" placeholder="请输入开具发票的企业名称">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="field-ta" class="col-sm-2 control-label">邮寄地址:</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" id="field-1" placeholder="请输入发票的邮寄地址">
+						</div>
+					</div>
+				    <div class="form-group">
+						<label for="field-ta" class="col-sm-2 control-label">收件人:</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" id="field-1" placeholder="请输入邮寄发票的收件人姓名">
+						</div>
+					 </div>
+					<div class="form-group">
+						<label for="field-ta" class="col-sm-2 control-label">联系电话:</label>
+						<div class="col-sm-9">
+							<input type="number" class="form-control" id="field-1" placeholder="请输入收件人电话">
+						</div>
+					 </div>
+									</form>
+			</div>				
+			</div>
+			
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">取 消</button>
+				<button type="button" class="btn btn-green">保存发票信息</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Bottom Scripts -->
+	<script src="assets/js/bootstrap.js"></script>
+	<script src="assets/js/jquery-1.11.0.min.js"></script>
+</body>
+</html>

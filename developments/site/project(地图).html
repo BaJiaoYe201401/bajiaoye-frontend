@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description" content="芭蕉叶-微创意服务平台" />
+	<meta name="author" content="" />	
+	<title>芭蕉叶-微创意服务平台</title>	
+	<link rel="stylesheet" href="assets/css/font-icons/entypo/css/entypo.css">
+	<link rel="stylesheet" href="assets/css/font-icons/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="assets/css/bootstrap.css">
+	<link rel="stylesheet" href="assets/css/bajiaoye-theme.css">
+	<link rel="stylesheet" href="assets/css/bajiaoye-form.css">
+<!--[if lt IE 9]><script src="assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+	<![endif]-->
+		
+</head>
+<body class="page-body project">
+<div class="page-container horizontal-menu">
+<header class="navbar navbar-fixed-top">
+	<ul class="navbar-brand project-menu">
+		<li class="project-back"><a href="#" class="tooltip-secondary" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="返回"><i class="entypo-left-open-big"></i></a></li>
+		<li class="project-setting"><img src="assets/images/project1-thumb.jpg" width="30px"/> <span> 叶问</span>
+		</li>
+		<li><a href="#mySetting" role="button" data-toggle="modal" class="pull-right"><i class="entypo-cog"></i> 作品设置</a></li>
+	</ul>
+	<ul class="project-menu navbar-right pull-right">
+		<li class="dropdown col-sm-5"><a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"><i class="glyphicon glyphicon-qrcode"></i> 扫一扫预览</a>
+		<div class="dropdown-menu dropdown-menu-rcode">
+		<img src="assets/images/rcode.jpg" width="146px"/>请使用微信二维码扫描预览</div>
+		</li>
+		<li class="col-sm-5"><a href="#" class="btn-orange">保 存</a></li>
+		<li class="col-sm-2"><a href="#"><i class="entypo-menu"></i></a></li>
+	</ul>
+</header>
+<div class="main-project">
+<!--左边菜单开始-->
+<div class="sidebar-menu">
+	<header>目 录</header>
+	<div class="content-list">
+		<ul>
+		<li><a href="#"><i class="entypo-book"></i> 开篇</a></li>
+		<li><a href="#"><i class=" entypo-doc"></i> 内页一 </a><div class="list-action"><a href="#" class="tooltip-secondary" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="编辑标题"><i class="glyphicon glyphicon-pencil"></i></a><a href="#" class="tooltip-secondary" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="删除该页"><i class="glyphicon glyphicon-trash"></i></a><a href="#" class="tooltip-secondary cursor-move" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="上下拖动"><i class="fa fa-arrows"></i></a></div></li>
+		<li class="content-list-active"><a href="#"><i class=" entypo-doc"></i> 内页二 </a></li>
+		<li><a href="#"><i class=" entypo-doc"></i> 内页三 </a></li>
+		</ul>
+	</div>
+</div>
+<!--左边菜单结束-->
+<div class="mainstage">
+	<div class="imgbox">
+		<div class="imgwrap">
+		<button type="button" class="btn btn-green btn-xs" onclick="jQuery('#modal-1').modal('show')">更换样式</button>
+		<img src="assets/images/work-sample/10/10-1.jpg" width="320px"/>
+		<img src="assets/images/work-sample/10/10-3.png" style="left:42%;top:280px"/>
+		</div>
+	    <a class="add-new next-page" href="#"><i class="entypo-plus-circled"></i>复制该内页</a>
+	</div>
+</div>
+<!--右边菜单开始-->
+<div class="sidebar-menu sidebar-menu-right">
+	<header>属性面板</header>
+	<p><b>创作说明：</b>在地图页面上，每个图层将会横向滑动的方式来展现</p>
+	<ul>
+	<li class="clearfix">
+		<div class="pull-left thumb-box"><img src="assets/images/work-sample/10/10-1.jpg"/>
+		<a href="#"><i class="fa fa-search-plus"></i></a>
+		</div>
+		<div class="pull-right thumb-info">
+			<span>地图背景.jpg</span>
+			<span>图片尺寸：640*1008px</span>
+			<span><button type="button" class="btn btn-success">更新图片</button></span>	
+		</div>
+	</li>
+   <li class="clearfix">
+		<div class="pull-left thumb-box"><img src="assets/images/work-sample/10/10-3.png"/>
+		<a href="#"><i class="fa fa-search-plus"></i></a>
+		</div>
+		<div class="pull-right thumb-info">
+				<span>位置标记.png <a data-toggle="tooltip" data-placement="left" title="" data-original-title="PNG图片背景是需要透明处理的">
+				<i class="entypo-info-circled"></i></a></span>
+				<span>图片尺寸：80*80px</span>
+				<span><button type="button" class="btn btn-success">更新图片</button></span>
+				<span>垂直位置设定：<input type="text" class="form-control input-sm" style="width:60px;display:inline-block"   
+				placeholder="720"> px
+			    </span>
+			    <span>水平位置设定：<input type="text" class="form-control input-sm" style="width:60px;display:inline-block" 
+			    placeholder="320"> px
+			    </span>
+		</div>
+	</li>
+  <li class="clearfix">
+		<div class="map-info">
+		<span>地图定位设置：</span>
+			<div class="input-group">
+			<input type="text" class="form-control" placeholder="请输入“美罗城”、“虹桥路1号”等等">
+			<span class="input-group-btn">
+				<button class="btn btn-success" type="button">搜索!</button>
+			</span>
+			</div>
+		<div class="map-preview">这里直接调用百度地图预览</div>
+		</div>
+  </li>
+</ul>
+</div>
+<!--右边菜单结束-->
+</div>
+</div>
+<!--作品设置浮动面板-->
+<div class="modal fade custom-width in" id="mySetting" aria-hidden="false" style="display: none;">
+	<div class="modal-dialog" style="width: 60%;">
+		<div class="modal-content setting-work">			
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h3 class="modal-title">作品基本信息设置</h3>
+			</div>			
+			<div class="modal-body row">
+			<div class="col-sm-4 album-setting">
+			<div class="fileinput fileinput-new" data-provides="fileinput"><input type="hidden" value="" name="...">
+								<div class="fileinput-new thumbnail" style="width: 150px; height: 150px;" data-trigger="fileinput">
+								<img src="http://placehold.it/150x150" alt="...">
+								</div>
+								<div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 150px; max-height: 150px; line-height: 6px;"></div>
+								<div>
+									<span class="btn btn-white btn-file">
+										<span class="fileinput-new">选择图片</span>
+										<span class="fileinput-exists">更改图片</span>
+										<input type="file" name="" accept="image/*">
+									</span>
+									<a href="#" class="btn btn-orange fileinput-exists" data-dismiss="fileinput">移除图片</a>
+								</div>
+							</div>
+			<h6>作品封面（缩略图）</h6>
+			<p>最大支持 1MB 的正方形图片( jpg / gif / png )</p>
+			</div>
+			<div class="col-sm-8">
+			<form role="form" class="form-horizontal form-groups-bordered">
+					<div class="form-group">
+						<label for="field-1" class="col-sm-2 control-label">标题</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" id="field-1" placeholder="请输入作品的标题">
+							<span>输入不超过12个字符，作为微信分享的标题<a href="#"> <i class="entypo-help-circled"></i></a></span>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="field-ta" class="col-sm-2 control-label">描述</label>
+						<div class="col-sm-9">
+							<textarea class="form-control" id="field-ta" placeholder="请描述一下您的作品"></textarea>
+							<span>输入不超过150个字符，作为微信分享的描述<a href="#"> <i class="entypo-help-circled"></i></a></span>
+						</div>
+					</div>
+				   <div class="form-group">
+						<label for="field-1" class="col-sm-2 control-label">背景音乐</label>
+						<div class="col-sm-9">
+							<input type="file" class="form-control" id="field-file" placeholder="Placeholder">
+							<div class="checkbox checkbox-replace color-green neon-cb-replacement checked">
+								<label class="cb-wrapper"><input type="checkbox" id="chk-1" checked=""><div class="checked"></div></label>
+								<label>启用背景音乐</label>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">背景颜色</label>
+						
+						<div class="col-sm-4">
+							<div class="input-group">
+								<input type="text" class="form-control colorpicker colorpicker-element" data-format="hex" value="#5a3d3d">
+								
+								<div class="input-group-addon">
+									<i class="color-preview" style="background-color: rgb(90, 61, 61);"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+									</form>
+			</div>				
+			</div>
+			
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">取 消</button>
+				<button type="button" class="btn btn-green">确认修改</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!--样式选择浮动面板-->
+<div class="modal fade custom-width in" id="modal-1" aria-hidden="false" style="display: none;">
+	<div class="modal-dialog" style="width: 90%;">
+		<div class="modal-content setting-style">			
+			<div class="modal-header clearfix">	
+				<h3 class="modal-title col-sm-8">请选择开篇样式</h3>	
+				<div class="col-sm-4 text-right">	
+				<button type="button" class="btn btn-default" data-dismiss="modal">取 消</button>
+				<button type="button" class="btn btn-green">确认并启用</button>
+				</div>
+			</div>
+			
+			<div class="modal-body row">
+			<ul class="clearfix">
+			<li class="col-sm-2 template-active"><img src="assets/images/style1.jpg" class="img-responsive"/>
+			<h5>描字互动</h5></li>
+			<li class="col-sm-2"><img src="assets/images/style1.jpg" class="img-responsive"/>
+			<h5>檫除互动</h5></li>
+			<li class="col-sm-2"><img src="assets/images/style1.jpg" class="img-responsive"/>
+			<h5>摇一摇互动</h5></li>
+			<li class="col-sm-2"><img src="assets/images/style1.jpg" class="img-responsive"/>
+			<h5>开屏互动</h5></li>
+			<li class="col-sm-2"><img src="assets/images/style1.jpg" class="img-responsive"/>
+			<h5>指纹开启</h5></li>
+			<li class="col-sm-2"><img src="assets/images/style1.jpg" class="img-responsive"/>
+			<h5>拖拽互动</h5></li>
+			<li class="col-sm-2"><img src="assets/images/style1.jpg" class="img-responsive"/>
+			<h5>摇一摇互动</h5></li>
+			<li class="col-sm-2"><img src="assets/images/style1.jpg" class="img-responsive"/>
+			<h5>开屏互动</h5></li>
+			</ul>
+			</div>
+		
+		</div>
+	</div>
+</div>
+	<!-- Bottom Scripts -->
+</body>
+</html>

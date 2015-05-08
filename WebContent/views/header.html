@@ -1,0 +1,55 @@
+<header class="navbar navbar-fixed-top" ng-controller="UserCtrl">
+    <div class="navbar-inner container">
+        <div class="navbar-brand">
+            <a href="javascript:void(0)">
+                <img src="images/logo@2x.png" width="88" alt=""/>
+            </a>
+        </div>
+        <ul class="navbar-nav pull-right">
+            <li class="myactive">
+                <a href="#/users/{{userId}}/works">
+                    <i class="entypo-layout"></i>
+                    <span>我的作品</span>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:void(0)">
+                    <i class="entypo-help"></i>
+                    <span>帮助中心</span>
+                </a>
+            </li>
+            <li>
+                <a href="#/users/{{userId}}/mysetting">
+                    <i class="entypo-user"></i>
+                    <span>用户中心</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="#/users/{{userId}}/mysetting">
+                            <i class="entypo-cog"></i>
+                            <span>个人设置</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#/users/{{userId}}/resetpassword">
+                            <i class="entypo-list"></i>
+                            <span>修改密码</span>
+                        </a>
+                    </li>
+                    <!--<li>-->
+                        <!--<a href="javascript:void(0)">-->
+                            <!--<i class="entypo-docs"></i>-->
+                            <!--<span>发票管理</span>-->
+                        <!--</a>-->
+                    <!--</li>-->
+                    <li>
+                        <a href="javascript:void(0)" ng-click="loginOut()">
+                            <i class="entypo-logout"></i>
+                            <span>登 出</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</header>

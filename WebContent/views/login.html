@@ -1,0 +1,46 @@
+<div class="login-page" ng-controller="UserCtrl">
+    <div class="modal fade in" style="display:block">
+        <div class="col-md-3 register-box login-box login-content" style="display:block">
+            <h2 class="login-header">用户登陆<span class="pull-right">还没有注册，<a href="#/register">请点击这里免费注册</a></span></h2>
+            <div class="login-form">
+                <div class="form-group">
+                    <div class="input-group" ng-class="{'validate-has-error':loginErrorMsg}">
+                        <div class="input-group-addon">
+                            <i class="entypo-mail"></i>
+                        </div>
+                        <input type="text" ng-change="loginErrorMsg=false" class="form-control" name="email" id="email" data-mask="email" placeholder="请输入你的电子邮件" autocomplete="off" ng-model="loginName" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group" ng-class="{'validate-has-error':loginErrorMsg}">
+                        <div class="input-group-addon">
+                            <i class="entypo-lock"></i>
+                        </div>
+                        <input type="password" ng-change="loginErrorMsg=false" class="form-control" name="password" id="password" placeholder="请输入密码" autocomplete="off" ng-model="password"/>
+                    </div>
+                    <span ng-show="loginErrorMsg" class="text-danger">你输入用户名或密码有错误，请检查后重新输入！</span><!--输入错误的提示-->
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success btn-block btn-login" ng-click="login()">
+                        登 录
+                    </button>
+                </div>
+                <div class="form-group">
+                    <a href="#/forget">忘记密码？点击这里找回密码</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- login success info-->
+    <div class="modal fade custom-width in" id="loginInfo" aria-hidden="false" style="display: none;padding-top: 220px">
+        <div class="modal-dialog" style="width: 20%;color: #996600;text-align: center;">
+            <div class="modal-content setting-style">
+                <div class="modal-header clearfix">
+                    <p style="font-size: 16px;">登录成功！</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

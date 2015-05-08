@@ -1,0 +1,38 @@
+<div class="page-body login-page" ng-controller="UserForgetCtrl">
+    <div class="modal fade in" style="display:block">
+    <div ng-show="!sendSuccess" class="col-md-3 register-box login-box login-content">
+        <h2 class="login-header">找回密码<span class="pull-right"><a href="#/login">返回登录</a></span></h2>
+        <div class="login-form">
+            <p ng-show="sendSuccess" style="color: red;">邮件发送成功！</p>
+            <div class="form-group">
+                <div class="input-group" ng-class="{'validate-has-error':sendTry}">
+                    <div class="input-group-addon">
+                        <i class="entypo-mail"></i>
+                    </div>
+                    <input type="text" ng-change="sendTry=false" class="form-control" name="email" ng-model="email" id="email" data-mask="email" placeholder="请输入你注册的电子邮件" autocomplete="off" />
+                </div>
+                <span ng-show="sendTry" class="text-danger">你输入的邮件不存在，请检查后重新输入！</span>
+            </div>
+            <div class="form-group">
+                <button type="submit" ng-click="getForgetPassword()" class="btn btn-success btn-block btn-login">
+                    找回密码
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- 找回密码 End -->
+    <div ng-show="sendSuccess" class="col-md-3 register-box login-box login-content">
+            <h2 class="login-header">邮件已成功发送到<b>{{email}}</b></h2>
+            <div class="login-form">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success btn-block btn-login" ng-click="openEmailLink(email)">
+                        马上登录邮箱
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

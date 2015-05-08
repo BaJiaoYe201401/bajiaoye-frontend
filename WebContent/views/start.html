@@ -1,0 +1,64 @@
+<div ng-controller="WorksCtrl">
+    <div class="page-container horizontal-menu">
+        <div ng-include="'views/header.html'"></div>
+        <div class="container createpage">
+            <div class="page-header clearfix">
+                <h1>创建新作品</h1>
+
+                <div class="action-header">
+                    <button type="button" class="btn btn-white btn-lg" ng-click="goBack()">取 消</button>
+                    <button type="button" class="btn btn-success btn-lg" ng-click="confirmNext()">确 认</button>
+                </div>
+            </div>
+            <div class="panel panel-primary">
+                <section class="row">
+                    <!-- 模板信息 -->
+                    <label for="field-1" class="col-sm-2 control-label">请输入作品的名称</label>
+
+                    <div class="col-sm-6" ng-class="{'has-error': worksName == ''}"><input type="text" class="form-control input-lg" id="field-1"
+                                                 placeholder="作品名称" ng-model="worksName"></div>
+                </section>
+                <!-- 模板分类 -->
+                <section class="row"><label class="col-sm-2">请选择一个模板</label>
+
+                    <div class="image-categories col-sm-10">
+                        <a href="javascript:void(0)" ng-class="{'active': selectedTab=='all'}" data-filter="all" ng-click="changeTabs('all')">全部模板</a> /
+                        <a href="javascript:void(0)" ng-class="{'active': selectedTab=='activity'}" data-filter="1d" ng-click="changeTabs('activity')">会议活动</a> /
+                        <a href="javascript:void(0)" ng-class="{'active': selectedTab=='news'}" data-filter="3d" ng-click="changeTabs('news')">新品推荐</a> /
+                        <a href="javascript:void(0)" ng-class="{'active': selectedTab=='magaz'}" data-filter="3d" ng-click="changeTabs('magaz')">轻杂志</a> /
+                        <a href="javascript:void(0)" ng-class="{'active': selectedTab=='brand'}" data-filter="1w" ng-click="changeTabs('brand')">品牌形象</a>
+                    </div>
+                </section>
+                <!-- 模板列表 -->
+                <section class="row">
+                    <div ng-if="selectedCategory.length>0" class="col-sm-3" ng-repeat="item in selectedCategory">
+                        <article class="template" ng-class="{'template-active':item.id==selectedTemplate.id}" ng-click="selectTemplate(item)">
+                            <header>
+                                <img ng-show="!(isShowQrCodeIndex==$index&&isShowQrCode)" ng-src="{{baseUrl+item.thumb}}" width="255" class="img-responsive"/>
+                                <qr ng-show="isShowQrCodeIndex==$index&&isShowQrCode" size="250" text="item.visitUrl" image="false"></qr>
+
+                                <div class="album-options"><a href="javascript:void(0)"> 查看该模板详情 </a></div>
+
+                            </header>
+                            <div class="album-info clearfix">
+                                <div class="album-info-left">
+                                    <h5><a href="extra-gallery-single.html">{{item.name}}</a></h5>
+
+                                    <p>by {{item.author}}</p>
+                                </div>
+                                <a href="javascript:void(0)" class="album-qrcode" ng-mousemove="toggleQrCode($index, true)" ng-mouseleave="toggleQrCode($index, false)">
+                                    <i class="glyphicon glyphicon-qrcode"></i>
+                                </a>
+                            </div>
+                        </article>
+                    </div>
+                    <div ng-if="selectedCategory.length==0" class="col-sm-3">
+                        <p>没有数据！</p>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <div ng-include="'views/footer.html'"></div>
+    <div id="code"></div>
+</div>

@@ -1,0 +1,37 @@
+<div class="page-container horizontal-menu">
+    <header class="navbar navbar-fixed-top">
+        <div class="navbar-inner container">
+            <div class="navbar-brand">
+                <a href="index.html">
+                    <img src="images/logo@2x.png" width="88" alt=""/>
+                </a>
+            </div>
+        </div>
+    </header>
+    <div class="container" ng-controller="SignUpCtrl">
+        <div class="page-header clearfix"><h1>客户报名表</h1></div>
+        <div class="row gallery-env">
+            <table class="table">
+                <tr>
+                    <th>姓名</th>
+                    <th>电话</th>
+                    <th>职位</th>
+                    <th>公司</th>
+                    <th>店铺</th>
+                    <th>报名时间</th>
+                </tr>
+                <tr ng-repeat="item in customerList">
+                    <td>{{item.name}}</td>
+                    <td>{{item.phone}}</td>
+                    <td>{{item.position}}</td>
+                    <td>{{item.company}}</td>
+                    <td>{{item.shop}}</td>
+                    <td>{{item.createTime}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<footer class="main">
+    <div class="container">© 2014 芭蕉叶网络科技有限公司 版权所有</div>
+</footer>
